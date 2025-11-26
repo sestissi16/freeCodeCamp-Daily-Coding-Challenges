@@ -4,14 +4,19 @@ def imageSearch(images, term):
     termCasefold = term.casefold()
     imagesToRemove = []
 
-    for image in images:
+    # determine if term is in images using casefold to make search case insensitive
+    for image in imagesCasefold:
         if term not in image:
-            imagesToRemove.append(image)
+            # indexes in images and imagesCasefold should match
+            # so I can use the the current index to grab the exact image name that I'm going to remove next
+            imageIndex = imagesCasefold.index(image)
+            imagesToRemove.append(images[imageIndex])
 
+    # removes the images that don't match the term
     for image in imagesToRemove:
         imageIndex = images.index(image)
         del images[imageIndex]
 
     return images
 
-print(imageSearch(["dog.png", "cat.jpg", "parrot.jpeg"], "dog"))
+print(imageSearch(["Sunset.jpg", "Beach.png", "sunflower.jpeg"], "sun"))
